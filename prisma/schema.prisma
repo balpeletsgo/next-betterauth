@@ -5,19 +5,18 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id              String    @id @default(cuid())
+  id              String    @id @default(cuid()) @db.VarChar(255)
   email           String    @db.VarChar(100)
   name            String?   @db.VarChar(255)
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
   emailVerified   Boolean
-  image           String?
+  image           String?   @db.VarChar(255)
   username        String?   @db.VarChar(100)
   displayUsername String?   @db.VarChar(100)
   sessions        Session[]
@@ -36,7 +35,7 @@ model Session {
   updatedAt DateTime
   ipAddress String?
   userAgent String?
-  userId    String
+  userId    String   @db.VarChar(255)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([token])
@@ -47,7 +46,7 @@ model Account {
   id                    String    @id
   accountId             String
   providerId            String
-  userId                String
+  userId                String    @db.VarChar(255)
   user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
