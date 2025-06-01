@@ -26,7 +26,6 @@ export default function SignInPage() {
   });
 
   async function onSignIn(data: z.infer<typeof signInSchema>) {
-    console.log("Sign-in data:", data);
 
     await authClient.signIn.email(
       {
