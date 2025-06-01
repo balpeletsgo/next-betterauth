@@ -26,7 +26,7 @@ const authSchema = z.object({
     .string({ required_error: "Password is required" })
     .min(1, "Password is required")
     .min(8, "Password must be at least 8 characters long"),
-  confirm_password: z
+  confirmPassword: z
     .string({ required_error: "Confirm password is required" })
     .min(1, "Confirm password is required")
     .min(8, "Confirm password must be at least 8 characters long"),
@@ -35,7 +35,7 @@ const authSchema = z.object({
 export const signInSchema = authSchema.omit({
   username: true,
   name: true,
-  confirm_password: true,
+  confirmPassword: true,
 });
 
 export const signUpSchema = authSchema
@@ -44,9 +44,9 @@ export const signUpSchema = authSchema
     name: true,
     email: true,
     password: true,
-    confirm_password: true,
+    confirmPassword: true,
   })
-  .refine((data) => data.password === data.confirm_password, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
-    path: ["confirm_password"],
+    path: ["confirmPassword"],
   });

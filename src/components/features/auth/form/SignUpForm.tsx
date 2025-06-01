@@ -104,7 +104,7 @@ export default function SignUpForm(props: SignUpFormProps) {
       />
       <FormField
         control={form.control}
-        name="confirm_password"
+        name="confirmPassword"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Confirm Password</FormLabel>
